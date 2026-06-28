@@ -9,6 +9,8 @@
 
 `rad-peer-review-analytics` helps radiology departments track peer review data, score discrepancies, and generate analytics reports. It supports both the RADPEER score system (1/2/3a/3b) and a standard score system (agree/minor/major/not actionable), with automatic score conversion, discrepancy classification, and trend detection.
 
+![rad-peer-review-analytics synthetic demo](docs/assets/demo.gif)
+
 ## Quick Start
 
 ```bash
@@ -41,6 +43,17 @@ rad-peer-review-analytics trends
 # Export raw reviews to CSV
 rad-peer-review-analytics export reviews.csv
 ```
+
+## Demo Media
+
+The README demo is generated from synthetic peer-review summary values only. To regenerate the GitHub assets:
+
+```bash
+python -m pip install -e ".[media]"
+python scripts/generate_demo_media.py
+```
+
+See [docs/DEMO_MEDIA.md](docs/DEMO_MEDIA.md) for the asset policy.
 
 ## Example
 
