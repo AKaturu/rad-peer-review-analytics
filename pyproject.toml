@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "rad-peer-review-analytics"
 version = "0.1.0"
 description = "Radiology peer review tracking, scoring, and analytics CLI"
-authors = [{ name = "Abinav Katuru", email = "akaturu@gmail.com" }]
+authors = [{ name = "Abhinav Katuru", email = "akaturu@gmail.com" }]
 license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.11"

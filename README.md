@@ -5,6 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Ruff](https://img.shields.io/badge/code%20style-ruff-261230.svg)](https://github.com/astral-sh/ruff)
 
+> **Validation status:** Software functionality has been tested using synthetic data. This project has not undergone clinical validation.
+
 **Radiology peer review tracking, scoring, and analytics — RADPEER and standard score systems.**
 
 `rad-peer-review-analytics` helps radiology departments track peer review data, score discrepancies, and generate analytics reports. It supports both the RADPEER score system (1/2/3a/3b) and a standard score system (agree/minor/major/not actionable), with automatic score conversion, discrepancy classification, and trend detection.

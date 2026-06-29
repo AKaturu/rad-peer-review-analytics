@@ -4,8 +4,6 @@ from rad_peer_review_analytics.models import SCORE_WEIGHTS, PeerReview
 
 
 def get_score_weight(score: str, score_system: str = "radpeer") -> float:
-    if score_system == "radpeer":
-        return SCORE_WEIGHTS.get(score, 0.5)
     return SCORE_WEIGHTS.get(score, 0.5)
 
 

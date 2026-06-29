@@ -3,6 +3,8 @@ from __future__ import annotations
 import csv
 import io
 
+from datetime import date, datetime
+
 from rad_peer_review_analytics.models import PeerReview, ReviewImport
 
 
@@ -36,8 +38,6 @@ def _row_to_review(row: dict[str, str]) -> PeerReview:
 
     if not reviewer_id or not score:
         raise ValueError("Missing required fields: reviewer_id and score")
-
-    from datetime import date, datetime
 
     review_date: date | None = None
     rd = row.get("review_date") or row.get("ReviewDate") or ""
