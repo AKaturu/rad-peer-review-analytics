@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import csv
 import io
-
 from datetime import date, datetime
 
 from rad_peer_review_analytics.models import PeerReview, ReviewImport
