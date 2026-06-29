@@ -54,9 +54,8 @@ def generate_reviews(
 
     for i in range(count):
         reviewer = random.choice(reviewers)
-        reviewee = random.choice([r for r in reviewers if r.reviewer_id != reviewer.reviewer_id])
-        if not reviewee:
-            reviewee = reviewer
+        peers = [r for r in reviewers if r.reviewer_id != reviewer.reviewer_id]
+        reviewee = random.choice(peers) if peers else reviewer
 
         score = random.choices(scores, weights=score_weights, k=1)[0]
         rd = start_date + timedelta(days=random.randint(0, date_range))

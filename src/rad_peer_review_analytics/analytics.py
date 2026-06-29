@@ -22,6 +22,8 @@ class AnalyticsEngine:
         self.reviewers: dict[str, Reviewer] = {}
 
     def load(self, reviews: list[PeerReview], reviewers: list[Reviewer] | None = None) -> None:
+        if not isinstance(reviews, list) or not all(isinstance(r, PeerReview) for r in reviews):
+            raise TypeError("reviews must be a list of PeerReview objects")
         self.reviews = reviews
         if reviewers:
             self.reviewers = {r.reviewer_id: r for r in reviewers}
