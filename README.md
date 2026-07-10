@@ -9,7 +9,9 @@
 
 `rad-peer-review-analytics` helps radiology departments track peer review data, score discrepancies, and generate analytics reports. It supports both the RADPEER score system (1/2/3a/3b) and a standard score system (agree/minor/major/not actionable), with automatic score conversion, discrepancy classification, and trend detection.
 
-![rad-peer-review-analytics synthetic demo](docs/assets/demo.gif)
+[![rad-peer-review-analytics synthetic demo](docs/assets/demo.gif)](https://cdn.jsdelivr.net/gh/AKaturu/rad-peer-review-analytics@master/docs/assets/demo.mp4)
+
+[Play the full demo video](https://cdn.jsdelivr.net/gh/AKaturu/rad-peer-review-analytics@master/docs/assets/demo.mp4)
 
 ## Evidence Status
 
