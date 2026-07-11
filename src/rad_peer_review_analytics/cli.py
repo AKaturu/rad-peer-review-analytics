@@ -47,9 +47,7 @@ def demo(
     system: str = typer.Option(
         "radpeer", "--system", "-s", help="Score system (radpeer or standard)"
     ),
-    load: bool = typer.Option(
-        True, "--load/--no-load", help="Load generated data into engine"
-    ),
+    load: bool = typer.Option(True, "--load/--no-load", help="Load generated data into engine"),
 ) -> None:
     """Generate synthetic peer review data for demonstration."""
     with Progress(
@@ -68,13 +66,11 @@ def demo(
         _reviewers = {r.reviewer_id: r for r in reviewers_list}
         _engine.load(_reviews, list(_reviewers.values()))
         console.print(
-            f"[green]Loaded {len(reviews_list)} reviews, "
-            f"{len(reviewers_list)} reviewers[/green]"
+            f"[green]Loaded {len(reviews_list)} reviews, {len(reviewers_list)} reviewers[/green]"
         )
     else:
         console.print(
-            f"[green]Generated {len(reviews_list)} reviews, "
-            f"{len(reviewers_list)} reviewers[/green]"
+            f"[green]Generated {len(reviews_list)} reviews, {len(reviewers_list)} reviewers[/green]"
         )
 
     _print_summary(reviews_list, reviewers_list)
@@ -121,12 +117,8 @@ def analyze() -> None:
 
 @app.command()
 def report(
-    output: str | None = typer.Option(
-        None, "--output", "-o", help="Export report CSV prefix"
-    ),
-    json_output: str | None = typer.Option(
-        None, "--json", "-j", help="Export report to JSON"
-    ),
+    output: str | None = typer.Option(None, "--output", "-o", help="Export report CSV prefix"),
+    json_output: str | None = typer.Option(None, "--json", "-j", help="Export report to JSON"),
 ) -> None:
     """Generate and display/export analytics report."""
     if not _ensure_data():
@@ -271,16 +263,10 @@ def _print_summary(reviews: list[PeerReview], reviewers: list[Reviewer] | None =
 def _display_report(report: AnalyticsReport) -> None:
     console.print("[bold]Peer Review Analytics Report[/bold]")
     console.print(f"Period: {report.date_range or 'N/A'}")
-    console.print(
-        f"Reviews: {report.total_reviews} | Reviewers: {report.total_reviewers}\n"
-    )
+    console.print(f"Reviews: {report.total_reviews} | Reviewers: {report.total_reviewers}\n")
 
-    console.print(
-        f"Overall Agreement Rate: [green]{report.overall_agreement_rate:.1%}[/green]"
-    )
-    console.print(
-        f"Major Discrepancy Rate: [red]{report.overall_major_discrepancy_rate:.1%}[/red]"
-    )
+    console.print(f"Overall Agreement Rate: [green]{report.overall_agreement_rate:.1%}[/green]")
+    console.print(f"Major Discrepancy Rate: [red]{report.overall_major_discrepancy_rate:.1%}[/red]")
     console.print(f"Average Score: {report.overall_avg_score:.3f}\n")
 
     if report.reviewer_stats:

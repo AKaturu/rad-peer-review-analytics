@@ -60,39 +60,59 @@ def _sample_report() -> AnalyticsReport:
         ],
         group_stats=[
             GroupStats(
-                group_name="Group X", reviewer_count=2, total_reviews=8,
-                agreement_rate=0.75, major_discrepancy_rate=0.125, avg_score=0.82,
+                group_name="Group X",
+                reviewer_count=2,
+                total_reviews=8,
+                agreement_rate=0.75,
+                major_discrepancy_rate=0.125,
+                avg_score=0.82,
             ),
         ],
         modality_stats=[
             ModalityStats(
-                modality="CT", total_reviews=6, agreement_rate=0.833,
-                major_discrepancy_rate=0.167, avg_score=0.83,
+                modality="CT",
+                total_reviews=6,
+                agreement_rate=0.833,
+                major_discrepancy_rate=0.167,
+                avg_score=0.83,
             ),
             ModalityStats(
-                modality="MRI", total_reviews=4, agreement_rate=0.75,
-                major_discrepancy_rate=0.0, avg_score=0.88,
+                modality="MRI",
+                total_reviews=4,
+                agreement_rate=0.75,
+                major_discrepancy_rate=0.0,
+                avg_score=0.88,
             ),
         ],
         body_part_stats=[
             BodyPartStats(
-                body_part="CHEST", total_reviews=7, agreement_rate=0.857,
+                body_part="CHEST",
+                total_reviews=7,
+                agreement_rate=0.857,
                 major_discrepancy_rate=0.143,
             ),
             BodyPartStats(
-                body_part="BRAIN", total_reviews=3, agreement_rate=0.667,
+                body_part="BRAIN",
+                total_reviews=3,
+                agreement_rate=0.667,
                 major_discrepancy_rate=0.0,
             ),
         ],
         monthly_trends=[
             MonthlyTrend(
-                year_month="2024-01", total_reviews=3, agreement_count=2,
-                agreement_rate=0.667, major_discrepancy_count=1,
+                year_month="2024-01",
+                total_reviews=3,
+                agreement_count=2,
+                agreement_rate=0.667,
+                major_discrepancy_count=1,
                 major_discrepancy_rate=0.333,
             ),
             MonthlyTrend(
-                year_month="2024-02", total_reviews=7, agreement_count=6,
-                agreement_rate=0.857, major_discrepancy_count=0,
+                year_month="2024-02",
+                total_reviews=7,
+                agreement_count=6,
+                agreement_rate=0.857,
+                major_discrepancy_count=0,
                 major_discrepancy_rate=0.0,
             ),
         ],
@@ -103,12 +123,19 @@ def _sample_report() -> AnalyticsReport:
 def _sample_reviews() -> list[PeerReview]:
     return [
         PeerReview(
-            review_id="R1", reviewer_id="R001", reviewee_id="R002",
-            case_id="C001", score="1",
+            review_id="R1",
+            reviewer_id="R001",
+            reviewee_id="R002",
+            case_id="C001",
+            score="1",
         ),
         PeerReview(
-            review_id="R2", reviewer_id="R001", reviewee_id="R003",
-            case_id="C002", score="3b", is_discrepant=True,
+            review_id="R2",
+            reviewer_id="R001",
+            reviewee_id="R003",
+            case_id="C002",
+            score="3b",
+            is_discrepant=True,
         ),
     ]
 
