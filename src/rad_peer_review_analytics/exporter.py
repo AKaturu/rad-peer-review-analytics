@@ -27,7 +27,7 @@ def export_report_json(report: AnalyticsReport, path: str) -> str:
     if dir_path:
         os.makedirs(dir_path, exist_ok=True)
 
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(report.model_dump(), f, indent=2, default=str)
     return path
 
@@ -37,7 +37,7 @@ def export_reviews_csv(reviews: list[PeerReview], path: str) -> str:
     if dir_path:
         os.makedirs(dir_path, exist_ok=True)
 
-    with open(path, "w", newline="") as f:
+    with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(
             [
@@ -69,7 +69,7 @@ def export_reviews_csv(reviews: list[PeerReview], path: str) -> str:
 def _write_csv(path: str, rows: list[list[str]]) -> None:
     if not rows:
         return
-    with open(path, "w", newline="") as f:
+    with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         for row in rows:
             writer.writerow(row)
