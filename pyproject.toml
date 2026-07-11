@@ -1,13 +1,14 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "rad-peer-review-analytics"
 version = "0.1.0"
 description = "Radiology peer review tracking, scoring, and analytics CLI"
-authors = [{ name = "Abhinav Katuru", email = "akaturu@gmail.com" }]
-license = { text = "MIT" }
+authors = [{ name = "Abinav Katuru", email = "akaturu@gmail.com" }]
+license = "MIT"
+license-files = ["LICENSE"]
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -27,6 +28,9 @@ rad-peer-review-analytics = "rad_peer_review_analytics.cli:app"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+rad_peer_review_analytics = ["py.typed"]
+
 [tool.ruff]
 target-version = "py311"
 line-length = 100
@@ -41,7 +45,6 @@ select = ["E", "F", "I", "N", "W", "UP", "RUF"]
 [tool.mypy]
 strict = false
 python_version = "3.11"
-ignore_missing_imports = true
 warn_unused_ignores = true
 warn_redundant_casts = true
 no_implicit_optional = true

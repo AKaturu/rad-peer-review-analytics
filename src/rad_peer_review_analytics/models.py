@@ -27,15 +27,23 @@ class RadpeerView(StrEnum):
     three_b = "3b"
 
 
-SCORE_WEIGHTS: dict[str, float] = {
+RADPEER_SCORE_WEIGHTS: dict[str, float] = {
     "1": 1.0,
     "2": 0.75,
     "3a": 0.25,
     "3b": 0.0,
+}
+
+STANDARD_SCORE_WEIGHTS: dict[str, float] = {
     "agree": 1.0,
     "minor_discrepancy": 0.5,
     "major_discrepancy": 0.0,
     "not_actionable_discrepancy": 0.5,
+}
+
+SCORE_WEIGHTS: dict[str, float] = {
+    **RADPEER_SCORE_WEIGHTS,
+    **STANDARD_SCORE_WEIGHTS,
 }
 
 SCORE_LABELS: dict[str, str] = {

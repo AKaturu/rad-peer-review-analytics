@@ -122,6 +122,7 @@ class AnalyticsEngine:
         results: list[ReviewerStats] = []
         for data in stats_map.values():
             total_rev = data["total_reviews"]
+            total_as_reviewer = data["total_as_reviewer"]
             scores = data["scores"]
             ag = data["agreement_count"]
             md = data["major_discrepancy_count"]
@@ -139,8 +140,8 @@ class AnalyticsEngine:
                     agreement_count=ag,
                     minor_discrepancy_count=data["minor_discrepancy_count"],
                     major_discrepancy_count=md,
-                    agreement_rate=round(_pct(ag, total_rev), 3),
-                    major_discrepancy_rate=round(_pct(md, total_rev), 3),
+                    agreement_rate=round(_pct(ag, total_as_reviewer), 3),
+                    major_discrepancy_rate=round(_pct(md, total_as_reviewer), 3),
                     avg_score=round(avg, 3),
                     trend_direction=self._compute_trend(data["reviewer_id"]),
                 )
@@ -161,12 +162,8 @@ class AnalyticsEngine:
         first_half = reviewer_reviews[:half]
         second_half = reviewer_reviews[half:]
 
-        first_agreement = sum(
-            1 for r in first_half if not is_discrepant(r.score, r.score_system)
-        )
-        second_agreement = sum(
-            1 for r in second_half if not is_discrepant(r.score, r.score_system)
-        )
+        first_agreement = sum(1 for r in first_half if not is_discrepant(r.score, r.score_system))
+        second_agreement = sum(1 for r in second_half if not is_discrepant(r.score, r.score_system))
         first_rate = _pct(first_agreement, len(first_half))
         second_rate = _pct(second_agreement, len(second_half))
 

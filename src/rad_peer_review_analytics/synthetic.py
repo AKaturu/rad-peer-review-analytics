@@ -10,14 +10,28 @@ _STANDARD_SCORES = ["agree", "minor_discrepancy", "major_discrepancy"]
 _MODALITIES = ["CT", "MRI", "XR", "US", "MAMMO", "PET", "NM"]
 _BODY_PARTS = ["CHEST", "BRAIN", "ABDOMEN", "PELVIS", "SPINE", "BREAST", "EXTREMITY", "HEAD/NECK"]
 _FINDING_TYPES = [
-    "mass", "nodule", "fracture", "infection", "hemorrhage",
-    "infarct", "normal", "calcification", "cyst", "effusion",
+    "mass",
+    "nodule",
+    "fracture",
+    "infection",
+    "hemorrhage",
+    "infarct",
+    "normal",
+    "calcification",
+    "cyst",
+    "effusion",
 ]
 _FIRST_NAMES = ["Alice", "Bob", "Carol", "David", "Eve", "Frank", "Grace", "Henry"]
 _LAST_NAMES = ["Smith", "Jones", "Lee", "Chen", "Patel", "Brown", "Wilson", "Davis"]
 _SUBSPECIALTIES = [
-    "body", "neuroradiology", "musculoskeletal", "breast",
-    "cardiovascular", "nuclear", "pediatric", "general",
+    "body",
+    "neuroradiology",
+    "musculoskeletal",
+    "breast",
+    "cardiovascular",
+    "nuclear",
+    "pediatric",
+    "general",
 ]
 _GROUPS = ["Group A", "Group B", "Group C"]
 
@@ -99,17 +113,21 @@ def _generate_comment(score: str, score_system: str) -> str:
     if score_system == "radpeer":
         if score == "1":
             return random.choice(["", "Agree with findings.", "Good study."])
-        return random.choice([
-            "Missed small nodule.",
-            "Disagree with interpretation.",
-            "Should have been called.",
-            "Subtle finding, easy to miss.",
-            "Different interpretation.",
-        ])
+        return random.choice(
+            [
+                "Missed small nodule.",
+                "Disagree with interpretation.",
+                "Should have been called.",
+                "Subtle finding, easy to miss.",
+                "Different interpretation.",
+            ]
+        )
     if score == "agree":
         return random.choice(["", "Agree.", "Concur."])
-    return random.choice([
-        "Missed finding.",
-        "Discrepancy in interpretation.",
-        "Different conclusion.",
-    ])
+    return random.choice(
+        [
+            "Missed finding.",
+            "Discrepancy in interpretation.",
+            "Different conclusion.",
+        ]
+    )

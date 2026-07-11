@@ -38,6 +38,10 @@ class TestGetScoreWeight:
     def test_unknown_score_default(self):
         assert get_score_weight("unknown", "radpeer") == 0.5
 
+    def test_score_from_other_system_is_not_reused(self):
+        assert get_score_weight("agree", "radpeer") == 0.5
+        assert get_score_weight("1", "standard") == 0.5
+
 
 class TestGetScoreLabel:
     def test_radpeer_1(self):
@@ -96,8 +100,11 @@ class TestIsMajorDiscrepant:
 class TestClassifyReview:
     def test_marks_discrepant(self):
         review = PeerReview(
-            review_id="R1", reviewer_id="R001", reviewee_id="R002",
-            case_id="C001", score="3b",
+            review_id="R1",
+            reviewer_id="R001",
+            reviewee_id="R002",
+            case_id="C001",
+            score="3b",
         )
         result = classify_review(review)
         assert result.is_discrepant is True
@@ -105,8 +112,11 @@ class TestClassifyReview:
 
     def test_marks_not_discrepant(self):
         review = PeerReview(
-            review_id="R1", reviewer_id="R001", reviewee_id="R002",
-            case_id="C001", score="1",
+            review_id="R1",
+            reviewer_id="R001",
+            reviewee_id="R002",
+            case_id="C001",
+            score="1",
         )
         result = classify_review(review)
         assert result.is_discrepant is False
@@ -117,11 +127,11 @@ class TestRadpeerToStandard:
     def test_1_to_agree(self):
         assert radpeer_to_standard("1") == "agree"
 
-    def test_2_to_minor(self):
-        assert radpeer_to_standard("2") == "minor_discrepancy"
+    def test_2_remains_agreement(self):
+        assert radpeer_to_standard("2") == "agree"
 
-    def test_3a_to_major(self):
-        assert radpeer_to_standard("3a") == "major_discrepancy"
+    def test_3a_to_not_actionable(self):
+        assert radpeer_to_standard("3a") == "not_actionable_discrepancy"
 
     def test_3b_to_major(self):
         assert radpeer_to_standard("3b") == "major_discrepancy"
@@ -134,8 +144,8 @@ class TestStandardToRadpeer:
     def test_agree_to_1(self):
         assert standard_to_radpeer("agree") == "1"
 
-    def test_minor_to_2(self):
-        assert standard_to_radpeer("minor_discrepancy") == "2"
+    def test_minor_to_3a(self):
+        assert standard_to_radpeer("minor_discrepancy") == "3a"
 
     def test_major_to_3b(self):
         assert standard_to_radpeer("major_discrepancy") == "3b"

@@ -27,7 +27,7 @@ def export_report_json(report: AnalyticsReport, path: str) -> str:
     if dir_path:
         os.makedirs(dir_path, exist_ok=True)
 
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(report.model_dump(), f, indent=2, default=str)
     return path
 
@@ -37,13 +37,22 @@ def export_reviews_csv(reviews: list[PeerReview], path: str) -> str:
     if dir_path:
         os.makedirs(dir_path, exist_ok=True)
 
-    with open(path, "w", newline="") as f:
+    with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(
             [
-                "review_id", "reviewer_id", "reviewee_id", "case_id",
-                "score", "score_system", "review_date", "modality",
-                "body_part", "finding_type", "is_discrepant", "comment",
+                "review_id",
+                "reviewer_id",
+                "reviewee_id",
+                "case_id",
+                "score",
+                "score_system",
+                "review_date",
+                "modality",
+                "body_part",
+                "finding_type",
+                "is_discrepant",
+                "comment",
             ]
         )
         for r in reviews:
@@ -69,7 +78,7 @@ def export_reviews_csv(reviews: list[PeerReview], path: str) -> str:
 def _write_csv(path: str, rows: list[list[str]]) -> None:
     if not rows:
         return
-    with open(path, "w", newline="") as f:
+    with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         for row in rows:
             writer.writerow(row)
@@ -78,10 +87,20 @@ def _write_csv(path: str, rows: list[list[str]]) -> None:
 def _reviewer_rows(report: AnalyticsReport) -> list[list[str]]:
     rows: list[list[str]] = [
         [
-            "ReviewerID", "Name", "Subspecialty", "Group",
-            "TotalReviews", "AsReviewer", "AsReviewee",
-            "AgreementCount", "MinorDiscCount", "MajorDiscCount",
-            "AgreementRate", "MajorDiscRate", "AvgScore", "Trend",
+            "ReviewerID",
+            "Name",
+            "Subspecialty",
+            "Group",
+            "TotalReviews",
+            "AsReviewer",
+            "AsReviewee",
+            "AgreementCount",
+            "MinorDiscCount",
+            "MajorDiscCount",
+            "AgreementRate",
+            "MajorDiscRate",
+            "AvgScore",
+            "Trend",
         ]
     ]
     for rs in report.reviewer_stats:
@@ -124,9 +143,7 @@ def _modality_rows(report: AnalyticsReport) -> list[list[str]]:
 
 
 def _body_part_rows(report: AnalyticsReport) -> list[list[str]]:
-    rows: list[list[str]] = [
-        ["BodyPart", "TotalReviews", "AgreementRate", "MajorDiscRate"]
-    ]
+    rows: list[list[str]] = [["BodyPart", "TotalReviews", "AgreementRate", "MajorDiscRate"]]
     for bs in report.body_part_stats:
         rows.append(
             [
@@ -141,8 +158,14 @@ def _body_part_rows(report: AnalyticsReport) -> list[list[str]]:
 
 def _trend_rows(report: AnalyticsReport) -> list[list[str]]:
     rows: list[list[str]] = [
-        ["YearMonth", "TotalReviews", "AgreementCount", "AgreementRate",
-         "MajorDiscCount", "MajorDiscRate"]
+        [
+            "YearMonth",
+            "TotalReviews",
+            "AgreementCount",
+            "AgreementRate",
+            "MajorDiscCount",
+            "MajorDiscRate",
+        ]
     ]
     for mt in report.monthly_trends:
         rows.append(
@@ -160,8 +183,7 @@ def _trend_rows(report: AnalyticsReport) -> list[list[str]]:
 
 def _group_rows(report: AnalyticsReport) -> list[list[str]]:
     rows: list[list[str]] = [
-        ["Group", "ReviewerCount", "TotalReviews", "AgreementRate",
-         "MajorDiscRate", "AvgScore"]
+        ["Group", "ReviewerCount", "TotalReviews", "AgreementRate", "MajorDiscRate", "AvgScore"]
     ]
     for gs in report.group_stats:
         rows.append(

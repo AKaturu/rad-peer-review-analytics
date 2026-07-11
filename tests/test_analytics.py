@@ -38,16 +38,21 @@ REVIEWER_B = Reviewer(reviewer_id="R002", name="Dr. B", group_name="Group X")
 REVIEWER_C = Reviewer(reviewer_id="R003", name="Dr. C", group_name="Group Y")
 
 REVIEW_WITH_DATES = [
-    _make_review("D1", "R001", "R002", "1", review_date=date(2024, 1, 15),
-                 modality="CT", body_part="CHEST"),
-    _make_review("D2", "R001", "R002", "1", review_date=date(2024, 2, 10),
-                 modality="CT", body_part="CHEST"),
-    _make_review("D3", "R001", "R002", "1", review_date=date(2024, 3, 5),
-                 modality="XR", body_part="CHEST"),
-    _make_review("D4", "R001", "R002", "3b", review_date=date(2024, 4, 20),
-                 modality="MRI", body_part="BRAIN"),
-    _make_review("D5", "R002", "R001", "1", review_date=date(2024, 5, 1),
-                 modality="CT", body_part="ABDOMEN"),
+    _make_review(
+        "D1", "R001", "R002", "1", review_date=date(2024, 1, 15), modality="CT", body_part="CHEST"
+    ),
+    _make_review(
+        "D2", "R001", "R002", "1", review_date=date(2024, 2, 10), modality="CT", body_part="CHEST"
+    ),
+    _make_review(
+        "D3", "R001", "R002", "1", review_date=date(2024, 3, 5), modality="XR", body_part="CHEST"
+    ),
+    _make_review(
+        "D4", "R001", "R002", "3b", review_date=date(2024, 4, 20), modality="MRI", body_part="BRAIN"
+    ),
+    _make_review(
+        "D5", "R002", "R001", "1", review_date=date(2024, 5, 1), modality="CT", body_part="ABDOMEN"
+    ),
 ]
 
 
@@ -103,6 +108,8 @@ class TestAnalyticsEngine:
         assert r1_stats.total_reviews == 3
         assert r1_stats.total_as_reviewer == 2
         assert r1_stats.agreement_count == 1  # only AGREE count as agreement for R001
+        assert r1_stats.agreement_rate == 0.5
+        assert r1_stats.major_discrepancy_rate == 0.5
 
     def test_reviewer_trend_stable_few_reviews(self):
         engine = AnalyticsEngine()
@@ -116,7 +123,7 @@ class TestAnalyticsEngine:
             _make_review(f"T{i}", "R001", "R002", "3b", review_date=date(2024, 1, i))
             for i in range(1, 5)
         ] + [
-            _make_review(f"T{i+10}", "R001", "R002", "1", review_date=date(2024, 2, i))
+            _make_review(f"T{i + 10}", "R001", "R002", "1", review_date=date(2024, 2, i))
             for i in range(1, 5)
         ]
         engine = AnalyticsEngine()
@@ -130,7 +137,7 @@ class TestAnalyticsEngine:
             _make_review(f"T{i}", "R001", "R002", "1", review_date=date(2024, 1, i))
             for i in range(1, 5)
         ] + [
-            _make_review(f"T{i+10}", "R001", "R002", "3b", review_date=date(2024, 2, i))
+            _make_review(f"T{i + 10}", "R001", "R002", "3b", review_date=date(2024, 2, i))
             for i in range(1, 5)
         ]
         engine = AnalyticsEngine()

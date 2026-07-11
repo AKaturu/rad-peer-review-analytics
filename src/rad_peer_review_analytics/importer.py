@@ -23,7 +23,7 @@ def import_csv(text: str) -> ReviewImport:
 
 
 def import_csv_file(path: str) -> ReviewImport:
-    with open(path, newline="") as f:
+    with open(path, newline="", encoding="utf-8") as f:
         return import_csv(f.read())
 
 

@@ -66,8 +66,10 @@ class TestReviewer:
 
     def test_full(self):
         r = Reviewer(
-            reviewer_id="R001", name="Dr. Smith",
-            subspecialty="body", group_name="Group A",
+            reviewer_id="R001",
+            name="Dr. Smith",
+            subspecialty="body",
+            group_name="Group A",
         )
         assert r.name == "Dr. Smith"
         assert r.subspecialty == "body"
@@ -88,8 +90,11 @@ class TestReviewCase:
 class TestPeerReview:
     def test_defaults(self):
         pr = PeerReview(
-            review_id="R1", reviewer_id="R001", reviewee_id="R002",
-            case_id="C001", score="1",
+            review_id="R1",
+            reviewer_id="R001",
+            reviewee_id="R002",
+            case_id="C001",
+            score="1",
         )
         assert pr.score_system == "radpeer"
         assert pr.review_date is None
@@ -97,17 +102,28 @@ class TestPeerReview:
 
     def test_standard_system(self):
         pr = PeerReview(
-            review_id="R1", reviewer_id="R001", reviewee_id="R002",
-            case_id="C001", score="agree", score_system="standard",
+            review_id="R1",
+            reviewer_id="R001",
+            reviewee_id="R002",
+            case_id="C001",
+            score="agree",
+            score_system="standard",
         )
         assert pr.score_system == "standard"
 
     def test_with_all_fields(self):
         pr = PeerReview(
-            review_id="R1", reviewer_id="R001", reviewee_id="R002",
-            case_id="C001", score="3b", score_system="radpeer",
-            review_date=date(2024, 5, 10), modality="CT", body_part="CHEST",
-            finding_type="nodule", comment="Missed finding",
+            review_id="R1",
+            reviewer_id="R001",
+            reviewee_id="R002",
+            case_id="C001",
+            score="3b",
+            score_system="radpeer",
+            review_date=date(2024, 5, 10),
+            modality="CT",
+            body_part="CHEST",
+            finding_type="nodule",
+            comment="Missed finding",
         )
         assert pr.review_date == date(2024, 5, 10)
         assert pr.modality == "CT"
@@ -122,8 +138,11 @@ class TestReviewImport:
 
     def test_with_data(self):
         pr = PeerReview(
-            review_id="R1", reviewer_id="R001", reviewee_id="R002",
-            case_id="C001", score="1",
+            review_id="R1",
+            reviewer_id="R001",
+            reviewee_id="R002",
+            case_id="C001",
+            score="1",
         )
         ri = ReviewImport(rows=[pr], skipped=1, errors=["error 1"])
         assert len(ri.rows) == 1
