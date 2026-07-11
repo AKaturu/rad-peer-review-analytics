@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Pinned every GitHub Action dependency to an immutable commit SHA.
 - Added a distribution-metadata contract test to prevent package-version drift.
 - Write and read JSON/CSV exports explicitly as UTF-8.
 - Corrected author attribution to Abinav Katuru.
